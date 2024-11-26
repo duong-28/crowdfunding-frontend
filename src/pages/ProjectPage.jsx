@@ -8,7 +8,7 @@ function ProjectPage() {
    const { project, isLoading, error } = useProject(id);   
 
    if (isLoading) {
-    return (<p>loading...</p>)
+    return (<p>fetching your project...</p>)
    }
 
    if (error) {
