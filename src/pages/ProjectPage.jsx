@@ -1,11 +1,16 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useProject from "../hooks/use-project";
+import deleteProject from "../api/delete-project";
+import { useState } from "react";
 
 function ProjectPage() {
     // Here we use a hook that comes for free in react router called `useParams` to get the id from the URL so that we can pass it to our useProject hook.
     const { id } = useParams();
+    const [deleteError, setDeleteError] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
    // useProject returns three pieces of info, so we need to grab them all here
    const { project, isLoading, error } = useProject(id);   
+    const navigate = useNavigate();
 
    if (isLoading) {
     return (<p>Accio project...</p>)
@@ -14,6 +19,28 @@ function ProjectPage() {
    if (error) {
     return (<p>{error.message}</p>)
    }
+
+
+   const handleDelete = async () => {
+    // event.preventDefault();
+
+    setDeleteError("") //reset errors 
+    setSuccessMessage(""); //reset success message
+    try {
+      const token = window.localStorage.getItem("token"); //retrieve the user's token
+      if (!token) {
+        setDeleteError("User is not authorised to delete this project")
+        return;
+      }
+
+    await deleteProject(id, token) 
+
+    setSuccessMessage("Project delete successfully"); //handle success 
+    navigate("/")
+  } catch (err) {
+    setDeleteError(`Failed to delete the project: ${err.message}`); //handle errors
+  }
+};
 
     return (
         <div>
@@ -30,6 +57,9 @@ function ProjectPage() {
                     );
                 })}
             </ul>
+            <button onClick={handleDelete}>Delete</button>
+            {deleteError && <p style={{color: "red"}}>{deleteError}</p>}
+            {successMessage && <p style={{color: "green"}}>{successMessage}</p>}
         </div>
     );
   }
