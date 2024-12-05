@@ -18,8 +18,8 @@ function LoginForm() {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    setError("") //this clears up any previous error from post login?
+    event.preventDefault(); //by default, submitting a form reloads the page. this helps the app handle the login without refreshing
+    setError("") //if there was an error from a previous login attempt, this clears it before trying again
     if (credentials.username && credentials.password) {
       try { 
         const response = await postLogin(credentials.username, credentials.password);
@@ -32,18 +32,7 @@ function LoginForm() {
       setError("Please fill out both fields.");
      }
   };
-  // const handleSubmit = (event) => { 
-  //   event.preventDefault();
-  //   if (credentials.username && credentials.password) {
-  //     postLogin(
-  //       credentials.username,
-  //       credentials.password
-  //     ).then((response) => {
-  //       window.localStorage.setItem("token", response.token);
-  //     });
-  //   }
-  // };
-
+  
     return (
       <form>
         <div>
