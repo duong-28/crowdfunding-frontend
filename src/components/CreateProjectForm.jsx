@@ -33,9 +33,9 @@ function CreateProjectForm() {
 
     const project = await postProject(projectData, token) //calling the post project function
 
-    setSuccessMessage('Project created successfully: ${project.title}'); //handle success 
+    setSuccessMessage(`Project created successfully: ${project.title}`); //handle success 
   } catch (err) {
-    setError('Failed to create project: ${err.message'); //handle errors
+    setError(`Failed to create project: ${err.message}`); //handle errors
   }
 };    
 
