@@ -3,7 +3,15 @@ import ProjectCard from "../components/ProjectCard";
 import "./HomePage.css";
 
 function HomePage() {
-    const { projects } = useProjects();
+    const { projects, isLoading, error } = useProjects();
+
+    if (isLoading) {
+        return (<p>Accio your projects..</p>)
+    }
+
+    if (error) {
+        return (<p>{error.message}</p>)
+    }
 
     return (
         <div id="project-list">
