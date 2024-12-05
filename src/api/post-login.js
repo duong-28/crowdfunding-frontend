@@ -11,6 +11,8 @@ async function postLogin(username, password) {
       }),
     });
   
+    // if the response is not ok we show an error 
+    // this is errors for the developer to use not to show the user
     if (!response.ok) {
       const fallbackError = `Error trying to login`;
   

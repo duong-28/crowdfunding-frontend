@@ -6,6 +6,8 @@ function LoginForm() {
     username: "",
     password: "",
   });
+  const [error, setError] = useState("");
+  
 
   const handleChange = (event) => {
     const { id, value } = event.target;
@@ -15,17 +17,32 @@ function LoginForm() {
     }));
   };
 
-  const handleSubmit = (event) => { 
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setError("") //this clears up any previous error from post login?
     if (credentials.username && credentials.password) {
-      postLogin(
-        credentials.username,
-        credentials.password
-      ).then((response) => {
+      try { 
+        const response = await postLogin(credentials.username, credentials.password);
         window.localStorage.setItem("token", response.token);
-      });
-    }
+      } catch (err) {
+        // when i got an error from my api now I can tell the user
+        setError("Ooopsie... Your Username or Password does not match. Please try again");
+      }
+     } else {
+      setError("Please fill out both fields.");
+     }
   };
+  // const handleSubmit = (event) => { 
+  //   event.preventDefault();
+  //   if (credentials.username && credentials.password) {
+  //     postLogin(
+  //       credentials.username,
+  //       credentials.password
+  //     ).then((response) => {
+  //       window.localStorage.setItem("token", response.token);
+  //     });
+  //   }
+  // };
 
     return (
       <form>
@@ -47,6 +64,7 @@ function LoginForm() {
             onChange={handleChange} 
           />
         </div>
+        {error && <p style={{color: "red"}}>{error}</p>}
         <button type="submit" onClick={handleSubmit}>Login</button>
       </form>
     );
