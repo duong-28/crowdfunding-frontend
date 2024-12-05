@@ -9,11 +9,11 @@ function ProjectPage() {
     const [deleteError, setDeleteError] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
    // useProject returns three pieces of info, so we need to grab them all here
-   const { project, isLoading, error } = useProject(id);   
+    const { project, isLoading, error } = useProject(id);   
     const navigate = useNavigate();
 
    if (isLoading) {
-    return (<p>Accio project...</p>)
+    return (<p>Accio projects!</p>)
    }
 
    if (error) {
@@ -22,14 +22,12 @@ function ProjectPage() {
 
 
    const handleDelete = async () => {
-    // event.preventDefault();
-
     setDeleteError("") //reset errors 
     setSuccessMessage(""); //reset success message
     try {
       const token = window.localStorage.getItem("token"); //retrieve the user's token
       if (!token) {
-        setDeleteError("User is not authorised to delete this project")
+        setDeleteError("Sorry! Looks like you're not authorised to delete this project!")
         return;
       }
 
