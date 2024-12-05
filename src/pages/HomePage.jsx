@@ -6,7 +6,7 @@ function HomePage() {
     const { projects, isLoading, error } = useProjects();
 
     if (isLoading) {
-        return (<p>Accio your projects..</p>)
+        return (<p>Accio projects...</p>)
     }
 
     if (error) {
@@ -15,8 +15,8 @@ function HomePage() {
 
     return (
         <div id="project-list">
-            {projects.map((projectData, key) => {
-                return <ProjectCard key={key} projectData={projectData} />;
+            {projects.map((project, key) => {
+                return <ProjectCard key={key} projectData={project} />;
             })}
         </div>
     )
