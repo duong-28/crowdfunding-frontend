@@ -6,7 +6,7 @@ function HomePage() {
     const { projects, isLoading, error } = useProjects();
 
     if (isLoading) {
-        return (<p>Accio projects...</p>)
+        return (<p>Accio Projects!</p>)
     }
 
     if (error) {

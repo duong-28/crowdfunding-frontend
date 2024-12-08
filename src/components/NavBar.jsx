@@ -4,6 +4,7 @@ function NavBar() {
   return (
     <div>
       <nav>
+        {/* Put them in a list */}
         <Link to="/">Home</Link>
         <Link to="/login">Log In</Link>
         <Link to="/signup">Sign Up</Link>

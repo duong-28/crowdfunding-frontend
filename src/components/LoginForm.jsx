@@ -1,5 +1,6 @@
 import { useState } from "react";
 import postLogin from "../api/post-login.js";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
   const [credentials, setCredentials] = useState({
@@ -7,7 +8,8 @@ function LoginForm() {
     password: "",
   });
   const [error, setError] = useState("");
-  
+  const [successMessage, setSuccessMessage] = useState("")
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { id, value } = event.target;
@@ -20,10 +22,16 @@ function LoginForm() {
   const handleSubmit = async (event) => {
     event.preventDefault(); //by default, submitting a form reloads the page. this helps the app handle the login without refreshing
     setError("") //if there was an error from a previous login attempt, this clears it before trying again
+    setSuccessMessage("")
     if (credentials.username && credentials.password) {
       try { 
         const response = await postLogin(credentials.username, credentials.password);
         window.localStorage.setItem("token", response.token);
+        setSuccessMessage("Successfully logged in!");
+        setTimeout(() => {
+          setSuccessMessage("");
+          navigate("/");
+        }, 1000); // Short delay to let the user see the message
       } catch (err) {
         // when i got an error from my api now I can tell the user
         setError("Ooopsie... Your Username or Password does not match. Please try again");
