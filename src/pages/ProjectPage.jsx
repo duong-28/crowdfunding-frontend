@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import useProject from "../hooks/use-project";
 import deleteProject from "../api/delete-project";
 import { useState } from "react";
+import PledgeForm from "../components/PledgeForm"; 
 
 function ProjectPage() {
     // Here we use a hook that comes for free in react router called `useParams` to get the id from the URL so that we can pass it to our useProject hook.
@@ -13,7 +14,7 @@ function ProjectPage() {
     const navigate = useNavigate();
 
    if (isLoading) {
-    return (<p>Accio projects!</p>)
+    return (<p>Accio project!</p>)
    }
 
    if (error) {
@@ -33,7 +34,7 @@ function ProjectPage() {
 
     await deleteProject(id, token) 
 
-    setSuccessMessage("Project delete successfully"); //handle success 
+    setSuccessMessage("Project deleted successfully"); //handle success 
     navigate("/")
   } catch (err) {
     setDeleteError(`Failed to delete the project: ${err.message}`); //handle errors
@@ -44,7 +45,7 @@ function ProjectPage() {
         <div>
             <h2>{project.title}</h2>
             <h3>Created at: {project.date_created}</h3>
-            <h3>{`Status: ${project.is_open}`}</h3>
+            <h3>{`Status: ${project.is_open ? 'Open': 'Closed'}`}</h3>
             <h3>Pledges:</h3>
             <ul>   
                 {project.pledges.map((pledgeData,key) => {
@@ -55,9 +56,10 @@ function ProjectPage() {
                     );
                 })}
             </ul>
+            < PledgeForm projectId={id} />
             <button onClick={handleDelete}>Delete</button>
-            {deleteError && <p style={{color: "red"}}>{deleteError}</p>}
-            {successMessage && <p style={{color: "green"}}>{successMessage}</p>}
+            {deleteError && <p>{deleteError}</p>}
+            {successMessage && <p>{successMessage}</p>}
         </div>
     );
   }
