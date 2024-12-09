@@ -1,15 +1,18 @@
 import { useState } from "react";
 import postLogin from "../api/post-login.js";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/use-auth.js";
 
 function LoginForm() {
+  const navigate = useNavigate();
+  const {auth, setAuth} = useAuth();
+
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("")
-  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { id, value } = event.target;
@@ -27,6 +30,7 @@ function LoginForm() {
       try { 
         const response = await postLogin(credentials.username, credentials.password);
         window.localStorage.setItem("token", response.token);
+        setAuth({token: response.token});
         setSuccessMessage("Successfully logged in!");
         setTimeout(() => {
           setSuccessMessage("");
