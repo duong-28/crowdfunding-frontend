@@ -14,7 +14,7 @@ function ProjectPage() {
    // useProject returns three pieces of info, so we need to grab them all here
     const { project, isLoading, error } = useProject(id);   
     const navigate = useNavigate();
-    const auth = useAuth();
+    const { auth } = useAuth();
 
    if (isLoading) {
     return (<p>Accio project!</p>)
@@ -23,7 +23,7 @@ function ProjectPage() {
    if (error) {
     return (<p>{error.message}</p>)
    }
-
+  //  debugger; => This helps freeze the code at this point and we can check the value of project
 
    const handleDelete = async () => {
     setDeleteError("") //reset errors 
