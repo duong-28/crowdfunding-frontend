@@ -15,6 +15,7 @@ async function postUser(username, password, email, first_name, last_name) {
     });
   
     if (!response.ok) {
+      // console.log(response.json());
       const fallbackError = `Error trying to login`;
   
       const data = await response.json().catch(() => {

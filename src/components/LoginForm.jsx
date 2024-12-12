@@ -30,7 +30,8 @@ function LoginForm() {
       try { 
         const response = await postLogin(credentials.username, credentials.password);
         window.localStorage.setItem("token", response.token);
-        setAuth({token: response.token});
+        window.localStorage.setItem("userId", response.user_id);
+        setAuth({token: response.token, userId: response.user_id});
         setSuccessMessage("Successfully logged in!");
         setTimeout(() => {
           setSuccessMessage("");
