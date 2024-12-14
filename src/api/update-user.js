@@ -1,5 +1,5 @@
 async function updateUser(userId, userData, token) {
-    const url  = `${import.meta.env.VITE_API_URL}/user/${userId}/`;
+    const url  = `${import.meta.env.VITE_API_URL}/users/${userId}/`;
     
     const response = await fetch(url, {
         method: 'PUT',
@@ -11,7 +11,7 @@ async function updateUser(userId, userData, token) {
     });
 
     if (!response.ok) {
-        const fallbackError = `Failed to update project ${userData.name}`;
+        const fallbackError = `Failed to update user ${userData.name}`;
 
         const data = await response.json().catch(() => {
             throw new Error(fallbackError);

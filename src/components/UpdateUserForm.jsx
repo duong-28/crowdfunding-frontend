@@ -4,9 +4,6 @@ import updateUser from '../api/update-user.js';
 function UpdateUserForm(props) {
     const { user } = props;
     const [formData, setFormData] = useState({
-        // username: "",
-        // email: "",
-        // password: "", 
         username: user.username,
         email: user.email,
         password: '', 
@@ -20,7 +17,6 @@ function UpdateUserForm(props) {
         setFormData((prevData) => ({
             ...prevData,
             [id]: value,
-            // [id]: type === 'checkbox' ? checked : value,
         }));
     }
 
