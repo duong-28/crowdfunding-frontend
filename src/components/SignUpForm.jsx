@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import postUser from "../api/post-user.js";
 import { useAuth } from "../hooks/use-auth.js";
 
+import "./SignUpForm.css";
+
 function SignUpForm() {
   const [credentials, setCredentials] = useState({
     username: "",
@@ -49,57 +51,40 @@ function SignUpForm() {
     }
   };
 
-    return (
-      <form>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            type = "text"
-            id = "username"
-            placeholder="Enter username"
-            onChange={handleChange} 
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input 
-            type = "password"
-            id = "password"
-            placeholder="Password"
-            onChange={handleChange} 
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input 
-            type = "email"
-            id = "email"
-            placeholder="email"
-            onChange={handleChange}
-            // consider validation for email if there's still time 
-          />
-        </div>
-        <div>
-          <label htmlFor="first_name">First Name:</label>
-          <input 
-            type = "first_name"
-            id = "first_name"
-            placeholder="First Name"
-            onChange={handleChange} 
-          />
-        </div>
-        <div>
-          <label htmlFor="last_name">Last Name:</label>
-          <input 
-            type = "last_name"
-            id = "last_name"
-            placeholder="Last Name"
-            onChange={handleChange} 
-          />
-        </div>
-        <button type="submit" onClick={handleSubmit}>Sign Up</button>
-      </form>
-    );
-  }
-  
-  export default SignUpForm;
+  return (
+    <form className="signup-form" onSubmit={handleSubmit}>
+      <div className="form-group">
+        <label htmlFor="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          placeholder="Enter username"
+          onChange={handleChange}
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Enter password"
+          onChange={handleChange}
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          placeholder="Enter email"
+          onChange={handleChange}
+        />
+      </div>
+      <button type="submit" className="submit-button">Sign Up</button>
+      {error && <p className="error-message">{error}</p>}
+      {successMessage && <p className="success-message">{successMessage}</p>}
+    </form>
+  );
+}
+
+export default SignUpForm;
