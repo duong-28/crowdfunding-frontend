@@ -8,8 +8,8 @@ function SignUpForm() {
     username: "",
     password: "",
     email: "", 
-    // first_name: "",
-    // last_name: "",
+    first_name: "",
+    last_name: "",
   });
 
   const {auth, setAuth} = useAuth();
