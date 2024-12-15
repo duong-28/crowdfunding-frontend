@@ -1,8 +1,9 @@
 async function deleteProject(projectId, token) {
     const url = `${import.meta.env.VITE_API_URL}/projects/${projectId}/`; 
-    const response = await fetch(url, { method: "DELETE", 
-      headers: {
-        "Authorization": `Token ${token}`, //use the token to authenticate user 
+    
+    const response = await fetch(url, { 
+      method: "DELETE", 
+      headers: {"Authorization": `Token ${token}`, //use the token to authenticate user 
       },
      });
   

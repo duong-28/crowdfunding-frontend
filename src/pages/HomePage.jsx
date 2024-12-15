@@ -8,7 +8,7 @@ function HomePage() {
     if (isLoading) {
         return (
             <div className="loading-container">
-                <p className="loading-text">Accio Projects!</p>
+                <p className="loading-text">Loading Dreams in Motion...</p>
             </div>
         );
     }
@@ -24,14 +24,42 @@ function HomePage() {
     return (
         <div className="home-container">
             <div className="hero-section">
-                <h1>Discover Amazing Projects</h1>
-                <p className="subtitle">Explore and connect with creative minds</p>
+                <div className="hero-content">
+                    <h1>Support Youth Soccer Dreams</h1>
+                    <p className="subtitle">Join our community in making soccer accessible to every child</p>
+                    <button className="cta-button">Start Supporting</button>
+                </div>
             </div>
-            <div className="projects-wrapper">
-                <div id="project-list">
-                    {projects.map((project, key) => {
-                        return <ProjectCard key={key} projectData={project} />;
-                    })}
+
+            <div className="categories-section">
+                <h2>Ways to Support</h2>
+                <div className="category-cards">
+                    <div className="category-card">
+                        <div className="category-icon">🏃</div>
+                        <h3>Equipment</h3>
+                        <p>Provide essential gear</p>
+                    </div>
+                    <div className="category-card">
+                        <div className="category-icon">👥</div>
+                        <h3>Coaching</h3>
+                        <p>Support training programs</p>
+                    </div>
+                    <div className="category-card">
+                        <div className="category-icon">🏆</div>
+                        <h3>Tournaments</h3>
+                        <p>Fund competition entries</p>
+                    </div>
+                </div>
+            </div>
+
+            <div className="featured-section">
+                <h2>Featured Projects</h2>
+                <div className="projects-wrapper">
+                    <div id="project-list">
+                        {projects.map((project, key) => {
+                            return <ProjectCard key={key} projectData={project} />;
+                        })}
+                    </div>
                 </div>
             </div>
         </div>
