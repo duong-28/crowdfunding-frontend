@@ -27,7 +27,7 @@ function HomePage() {
             <div className="hero-section">
                 <div className="hero-content">
                     <h1>Support Youth Soccer Dreams</h1>
-                    <p className="subtitle">Join Atletico community in making soccer accessible to every child</p>
+                    <p className="subtitle">Join Atletico in making soccer accessible to every child</p>
                     <button className="cta-button">Start Supporting</button>
                 </div>
             </div>
