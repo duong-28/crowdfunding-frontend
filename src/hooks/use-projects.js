@@ -13,15 +13,23 @@ export default function useProjects() {
   // We use the useEffect hook to fetch the projects from the API and update the state variables accordingly.
   // This useEffect will only run once, when the component this hook is used in is mounted.
   useEffect(() => {
-    getProjects()
-      .then((projects) => {
-        setProjects(projects);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setError(error);
-        setIsLoading(false);
-      });
+    // Add artificial delay using setTimeout
+    const loadProjects = async () => {
+      try {
+        const data = await getProjects();
+        setTimeout(() => {
+          setProjects(data);
+          setIsLoading(false);
+        }, 1000); // Changed from 2000 to 5000 for a 5-second loading screen
+      } catch (error) {
+        setTimeout(() => {
+          setError(error);
+          setIsLoading(false);
+        }, 5000); // Make sure to change both timeouts to match
+      }
+    };
+
+    loadProjects();
   }, []);
 
   // Finally, we return the state variables and the error. As the state in this hook changes it will update these values and the component using this hook will re-render.
