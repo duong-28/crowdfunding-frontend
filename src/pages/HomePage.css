@@ -1,8 +1,8 @@
 :root {
     --primary-orange: #ff7b00;
     --accent-red: #ff3b00;
-    --dark-bg: #111111;
-    --darker-bg: #0a0a0a;
+    --dark-bg: #1a1a1a;
+    --darker-bg: #151515;
     --text-white: #ffffff;
     --text-gray: #cccccc;
 }
@@ -69,14 +69,36 @@ body {
 }
 
 .hero-section h1 {
-    font-size: 3.5rem;
+    font-family: 'Black Ops One', cursive;
+    font-size: 4.2rem;
     margin-bottom: 1.5rem;
-    font-weight: 800;
-    line-height: 1;
+    line-height: 1.1;
     text-transform: uppercase;
     letter-spacing: 2px;
-    text-shadow: 0 0 20px rgba(255, 123, 0, 0.3);
-    white-space: nowrap;
+    text-shadow: 
+        3px 3px 0 rgba(255, 123, 0, 0.4),
+        -1px -1px 0 rgba(255, 59, 0, 0.4);
+    max-width: 100%;
+    padding: 0 1rem;
+    text-align: center;
+    /* Add some texture */
+    filter: contrast(1.1);
+}
+
+/* Optional: Add animation on page load */
+.hero-section h1 {
+    animation: roughReveal 1s ease-out;
+}
+
+@keyframes roughReveal {
+    from {
+        opacity: 0;
+        transform: scale(1.1) rotate(2deg);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
 }
 
 .hero-section .subtitle {
@@ -265,4 +287,24 @@ body {
     #project-list {
         grid-template-columns: 1fr;
     }
+}
+
+@media (max-width: 1200px) {
+    .hero-section h1 {
+        font-size: 3.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2.8rem;
+        letter-spacing: 1px;
+    }
+}
+
+@font-face {
+    font-family: 'Zuume Rough';
+    src: url('/fonts/ZuumeRough-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
 }
