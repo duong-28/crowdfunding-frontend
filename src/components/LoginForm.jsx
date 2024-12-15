@@ -26,6 +26,7 @@ function LoginForm() {
     event.preventDefault(); //by default, submitting a form reloads the page. this helps the app handle the login without refreshing
     setError("") //if there was an error from a previous login attempt, this clears it before trying again
     setSuccessMessage("")
+
     if (credentials.username && credentials.password) {
       try { 
         const response = await postLogin(credentials.username, credentials.password);
@@ -39,7 +40,7 @@ function LoginForm() {
         }, 1000); // Short delay to let the user see the message
       } catch (err) {
         // when i got an error from my api now I can tell the user
-        setError("Ooopsie... Your Username or Password does not match. Please try again");
+        setError("Invalid username or password. Please try again");
       }
      } else {
       setError("Please fill out both fields.");
