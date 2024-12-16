@@ -3,6 +3,8 @@ import postLogin from "../api/post-login.js";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/use-auth.js";
 
+import './LoginForm.css';
+
 function LoginForm() {
   const navigate = useNavigate();
   const {auth, setAuth} = useAuth();
@@ -47,30 +49,33 @@ function LoginForm() {
      }
   };
   
-    return (
-      <form>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            type = "text"
-            id = "username"
-            placeholder="Enter username"
-            onChange={handleChange} 
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input 
-            type = "password"
-            id = "password"
-            placeholder="Password"
-            onChange={handleChange} 
-          />
-        </div>
-        {error && <p style={{color: "red"}}>{error}</p>}
-        <button type="submit" onClick={handleSubmit}>Login</button>
-      </form>
-    );
-  }
-  
-  export default LoginForm;
+  return (
+    <form className="login-form" onSubmit={handleSubmit}>
+      <div className="form-group">
+        <label htmlFor="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          placeholder="Enter username"
+          value={credentials.username}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Enter password"
+          value={credentials.password}
+          onChange={handleChange}
+        />
+      </div>
+      <button type="submit" className="submit-button">Log In</button>
+      {error && <p className="error-message">{error}</p>}
+      {successMessage && <p className="success-message">{successMessage}</p>}
+    </form>
+  );
+}
+
+export default LoginForm;
