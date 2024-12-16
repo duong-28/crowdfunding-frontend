@@ -228,7 +228,7 @@ body {
 .loading-ball {
     width: 150px;
     height: 150px;
-    background: url('/photos/Soccer-ball-on-fire.png') center/contain no-repeat;
+    background: url('/photos/Soccer-ball-on-fire.svg') center/contain no-repeat;
     margin-bottom: 2rem;
     animation: loadingBall 2s infinite ease-in-out;
 }

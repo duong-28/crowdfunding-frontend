@@ -1,20 +1,31 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import postPledge from "../api/post-pledge.js";
+import { use } from "react";
 
 function PledgeForm(projectId) {
   // const { projectId } = props;
   const navigate = useNavigate();
-
-  const [pledgeData, setPledgeData] = useState({
-    amount: "",
-    comment: "",
-    anonymous: false,
-    project: projectId,
-  });
-
+  const { auth } = useAuth();
+  const [amount, setAmount] = useState("");
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+
+  const [pledgeData, setPledgeData] = useState({
+    amount: '',
+    comment: '', 
+    project: projectId,
+    anonymous: !auth.token,
+  });
+
+  // Pledge data when user has to log in to make a pledge
+  // const [pledgeData, setPledgeData] = useState({
+  //   amount: "",
+  //   comment: "",
+  //   anonymous: false,
+  //   project: projectId,
+  // });
 
   const handleChange = (event) => {
     const { id, value, type, checked } = event.target;
