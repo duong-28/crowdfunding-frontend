@@ -186,13 +186,14 @@ body {
 }
 
 /* Featured Projects Section */
-.featured-section {
+.featured-projects-section {
     padding: 6rem 2rem;
     background-color: var(--dark-bg);
     position: relative;
+    margin-top: 2rem;
 }
 
-.featured-section h2 {
+.featured-projects-section h2 {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 3rem;
@@ -201,13 +202,34 @@ body {
     letter-spacing: 1px;
 }
 
+.projects-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 #project-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2.5rem;
-    max-width: 1200px;
-    margin: 0 auto;
     padding: 0 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .featured-projects-section {
+        padding: 4rem 1rem;
+    }
+
+    #project-list {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    #project-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 /* Loading and Error States */
@@ -316,4 +338,9 @@ body {
     src: url('/fonts/ZuumeRough-Bold.woff2') format('woff2');
     font-weight: bold;
     font-style: normal;
+}
+
+/* Ensure the last item in the grid follows the same rules */
+#project-list > *:last-child {
+    height: 100%;
 }

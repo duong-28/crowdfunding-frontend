@@ -53,7 +53,7 @@ function HomePage() {
                 </div>
             </div>
 
-            <div className="featured-section">
+            <div id="featured-projects" className="featured-projects-section">
                 <h2>Featured Projects</h2>
                 <div className="projects-wrapper">
                     <div id="project-list">

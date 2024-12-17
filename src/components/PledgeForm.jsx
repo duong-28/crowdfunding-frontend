@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/use-auth.js";
 import postPledge from "../api/post-pledge.js";
 
-function PledgeForm(projectId) {
+function PledgeForm({ projectId }) {
   // const { projectId } = props;
   const navigate = useNavigate();
   const { auth } = useAuth();
@@ -15,7 +15,7 @@ function PledgeForm(projectId) {
   const [pledgeData, setPledgeData] = useState({
     amount: '',
     comment: '', 
-    project: projectId,
+    project: Number(projectId),
     anonymous: !auth.token,
   });
 
@@ -31,22 +31,43 @@ function PledgeForm(projectId) {
     const { id, value, type, checked } = event.target;
     setPledgeData((prevData) => ({
       ...prevData,
-      [id]: type === 'checkbox' ? checked : value,
+      [id]: type === 'checkbox' 
+        ? checked 
+        : id === 'amount' 
+          ? Number(value)  // Convert amount to number
+          : value,
     }));
   };
 
   const handleSubmit = async (event) => { 
     event.preventDefault();
-    setError("")
-    setSuccessMessage("")
+    setError("");
+    setSuccessMessage("");
     
     try {
       const token = auth.token;
-      const supporter =  auth.userId;
-      await postPledge(supporter, pledgeData.amount, pledgeData.comment, pledgeData.anonymous, pledgeData.project, token);
+      const supporter = auth.userId;
+      
+      // Log the pledge attempt
+      console.log('Attempting to create pledge:', {
+        isAuthenticated: !!token,
+        pledgeData,
+        supporter
+      });
+
+      await postPledge(
+        supporter, 
+        pledgeData.amount, 
+        pledgeData.comment, 
+        !token || pledgeData.anonymous, // Force anonymous if not logged in
+        pledgeData.project, 
+        token
+      );
+      
       setSuccessMessage(`Pledge created successfully for project ${projectId}`);
       navigate(`/projects/${projectId}`);
     } catch (err) {
+      console.error("Full error:", err);
       setError(`Failed to create pledge: ${err.message}`);
     }
   };

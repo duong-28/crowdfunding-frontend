@@ -11,6 +11,14 @@ function NavBar() {
         setAuth({ token: null, userId: null });
     };
 
+    const scrollToFeatured = (e) => {
+        e.preventDefault();
+        const featuredSection = document.getElementById('featured-projects');
+        if (featuredSection) {
+            featuredSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <div>
             <nav>
@@ -21,9 +29,11 @@ function NavBar() {
                     </Link>
                 </div>
                 <div className="nav-center">
-                    <Link to="/" className="nav-item">Home</Link>
-                    <Link to="/projects" className="nav-item">Projects</Link>
-                    <Link to="/about" className="nav-item">About</Link>
+                    <a href="#featured-projects" 
+                       className="nav-item featured-projects"
+                       onClick={scrollToFeatured}>
+                        Featured Projects
+                    </a>
                 </div>
                 <div className="nav-right">
                     {auth.token ? (

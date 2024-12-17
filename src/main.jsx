@@ -14,15 +14,16 @@ import UserPage from "./pages/UserPage.jsx";
 
 const router = createBrowserRouter([
   {
-    path:"/",
+    path: "/",
     element: <NavBar />,
     children: [
-      { path: "/", element: <HomePage />},
+      { path: "/", element: <HomePage /> },
+      { path: "/projects", element: <HomePage /> },
       { path: "/login", element: <LoginPage /> },
-      { path: "/project/:id", element: <ProjectPage />},
-      { path: "/signup", element: <SignUpPage />},
-      { path: "/create-project", element: <CreateProjectPage />},
-      { path: "/user-page", element: <UserPage />},
+      { path: "/projects/:id", element: <ProjectPage /> },
+      { path: "/signup", element: <SignUpPage /> },
+      { path: "/create-project", element: <CreateProjectPage /> },
+      { path: "/user-page", element: <UserPage /> },
     ],
   },
 ]);
