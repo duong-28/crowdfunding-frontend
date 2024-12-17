@@ -3,22 +3,25 @@ import "./ProjectCard.css";
 
 function ProjectCard(props) {
   const { projectData } = props;
-  const projectLink = `/project/${projectData.id}`;
+  const projectLink = `/projects/${projectData.id}`;
 
-  // Add error handling for image loading
   const handleImageError = (e) => {
-    e.target.src = '/photos/default-project.jpg'; // Add a default image as fallback
+    e.target.src = '/photos/default-project.jpg';
   };
 
   return (
-    <div>
+    <div className="project-card">
       <Link to={projectLink}>
-        <img 
-          src={projectData.image} 
-          onError={handleImageError}
-          alt={projectData.title}
-        />
-        <h3>{projectData.title}</h3>
+        <div className="project-card-image">
+          <img 
+            src={projectData.image} 
+            onError={handleImageError}
+            alt={projectData.title}
+          />
+        </div>
+        <div className="project-card-content">
+          <h3>{projectData.title}</h3>
+        </div>
       </Link>
     </div>
   );
