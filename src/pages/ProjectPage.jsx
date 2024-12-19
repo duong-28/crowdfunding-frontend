@@ -1,10 +1,13 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../hooks/use-auth";
+
 import useProject from "../hooks/use-project";
 import deleteProject from "../api/delete-project";
 import PledgeForm from "../components/PledgeForm"; 
 import UpdateProjectForm from "../components/UpdateProjectForm";
-import { useAuth } from "../hooks/use-auth";
+import useProjectPledges from "../hooks/use-project-pledges";
+import PledgeList from "../components/PledgeList";
 
 function ProjectPage() {
     // Here we use a hook that comes for free in react router called `useParams` to get the id from the URL so that we can pass it to our useProject hook.
@@ -15,7 +18,8 @@ function ProjectPage() {
     const { project, isLoading, error } = useProject(id);   
     const navigate = useNavigate();
     const { auth } = useAuth();
-
+    const { pledges, isLoading: pledgesLoading, error: pledgesError } = useProjectPledges(id);
+    
    if (isLoading) {
     return (<p>Accio project!</p>)
    }
@@ -49,18 +53,17 @@ function ProjectPage() {
             <h2>{project.title}</h2>
             <h3>Created at: {project.date_created}</h3>
             <h3>{`Status: ${project.is_open ? 'Open': 'Closed'}`}</h3>
-            <h3>Pledges:</h3>
-            <ul>   
-                {project.pledges.map((pledgeData,key) => {
-                    return (
-                        <li key={key}>
-                            {pledgeData.amount} from {pledgeData.supporter}
-                        </li>
-                    );
-                })}
-            </ul>
-            < PledgeForm projectId={id} />
-            { auth.token ? < UpdateProjectForm project={project} /> : null}
+            
+            {pledgesLoading ? (
+                <p>Loading pledges...</p>
+            ) : pledgesError ? (
+                <p>{pledgesError}</p>
+            ) : (
+                <PledgeList pledges={pledges} />
+            )}
+
+            <PledgeForm projectId={id} />
+            {auth.token ? <UpdateProjectForm project={project} /> : null}
             <button onClick={handleDelete}>Delete</button>
             {deleteError && <p>{deleteError}</p>}
             {successMessage && <p>{successMessage}</p>}
