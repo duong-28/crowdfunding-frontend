@@ -25,6 +25,7 @@ function HomePage() {
     return (
         <div className="home-container">
             <div className="hero-section">
+                <div className="hero-overlay"></div>
                 <div className="hero-content">
                     <h1>Support Youth Soccer Dreams</h1>
                     <p className="subtitle">Join Atletico in making soccer accessible to every child</p>
