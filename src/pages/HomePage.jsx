@@ -11,12 +11,12 @@ function HomePage() {
 
     const handleStartSupporting = () => {
         if (auth?.token) {
-            // User is logged in, navigate to create project page
-            navigate("/create-project");
+            // User is logged in, navigate to create pledge page
+            navigate("/create-pledge");
         } else {
             // User is not logged in, show modal/alert
             const choice = window.confirm(
-                "You need to be logged in to create a project. Would you like to sign up or log in?"
+                "You need to be logged in to make a pledge. Would you like to sign up or log in?"
             );
             if (choice) {
                 navigate("/signup");
