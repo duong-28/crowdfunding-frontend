@@ -1,9 +1,28 @@
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/use-auth";
 import useProjects from "../hooks/use-projects";
 import ProjectCard from "../components/ProjectCard";
 import "./HomePage.css";
 
 function HomePage() {
+    const { auth } = useAuth();
+    const navigate = useNavigate();
     const { projects, isLoading, error } = useProjects();
+
+    const handleStartSupporting = () => {
+        if (auth?.token) {
+            // User is logged in, navigate to create project page
+            navigate("/create-project");
+        } else {
+            // User is not logged in, show modal/alert
+            const choice = window.confirm(
+                "You need to be logged in to create a project. Would you like to sign up or log in?"
+            );
+            if (choice) {
+                navigate("/signup");
+            }
+        }
+    };
 
     if (isLoading) {
         return (
@@ -29,7 +48,7 @@ function HomePage() {
                 <div className="hero-content">
                     <h1>Support Youth Soccer Dreams</h1>
                     <p className="subtitle">Join Atletico in making soccer accessible to every child</p>
-                    <button className="cta-button">Start Supporting</button>
+                    <button className="cta-button" onClick={handleStartSupporting}>Start Supporting</button>
                 </div>
             </div>
 
