@@ -1,6 +1,8 @@
 import { useState } from "react";
 import postProject from "../api/post-project.js";
 
+import "./CreateProjectForm.css";
+
 function CreateProjectForm() {
   const [projectData, setProjectData] = useState({
     title: "",
@@ -41,49 +43,53 @@ function CreateProjectForm() {
 
 
     return (
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="title">Project Title:</label>
-          <input
-            type = "text"
-            id = "title"
-            placeholder="Enter Project title"
-            onChange={handleChange} 
-          />
-        </div>
-        <div>
-          <label htmlFor="description">Project Description:</label>
-          <input 
-            type = "text"
-            id = "description"
-            placeholder="Enter Project description"
-            onChange={handleChange} 
-          />
-        </div>
-        <div>
-          <label htmlFor="goal">Goal:</label>
-          <input 
-            type = "number"
-            id = "goal"
-            placeholder="Enter goal amount"
-            value={projectData.goal}
-            onChange={handleChange} 
-          />
-        </div>
-        <div>
-          <label htmlFor="image">Image URL:</label>
-          <input 
-            type = "text"
-            id = "image"
-            placeholder="Enter image URL"
-            value={projectData.image}
-            onChange={handleChange} 
-          />
-        </div>
-        {error && <p style={{color: "red"}}>{error}</p>}
-        {successMessage && <p style={{color: "green"}}>{successMessage}</p>}
-        <button type="submit">Create Project</button>
-      </form>
+      <div className="form-container">
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="title">Project Title:</label>
+            <input
+              type="text"
+              id="title"
+              placeholder="Enter project title"
+              value={projectData.title}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="description">Project Description:</label>
+            <input
+              type="text"
+              id="description"
+              placeholder="Enter project description"
+              value={projectData.description}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="goal">Goal:</label>
+            <input
+              type="number"
+              id="goal"
+              placeholder="Enter goal amount"
+              value={projectData.goal}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="image">Image URL:</label>
+            <input
+              type="text"
+              id="image"
+              placeholder="Enter image URL"
+              value={projectData.image}
+              onChange={handleChange}
+            />
+          </div>
+          {error && <p className="error-message">{error}</p>}
+          {successMessage && <p className="success-message">{successMessage}</p>}
+          <button type="submit">Create Project</button>
+        </form>
+      </div>
     );
   }
   
