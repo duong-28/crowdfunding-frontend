@@ -9,19 +9,15 @@ async function postUser(username, password, email, first_name, last_name) {
         "username": username,
         "password": password,
         "email": email, 
-        "first_name": first_name,
-        "last_name": last_name,
       }),
     });
   
     if (!response.ok) {
       // console.log(response.json());
-      const fallbackError = `Error trying to login`;
-  
+      const fallbackError = `Error trying to sign up. Please try again.`;
       const data = await response.json().catch(() => {
         throw new Error(fallbackError);
       });
-  
       const errorMessage = data?.detail ?? fallbackError;
       throw new Error(errorMessage);
     }

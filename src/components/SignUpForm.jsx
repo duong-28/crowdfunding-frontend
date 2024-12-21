@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import postUser from "../api/post-user.js";
 import { useAuth } from "../hooks/use-auth.js";
+
 import "../styles/AuthPages.css";
 
 function SignUpForm() {
@@ -9,12 +10,11 @@ function SignUpForm() {
     username: "",
     password: "",
     email: "",
-    first_name: "",
-    last_name: "",
   });
 
   const { auth, setAuth } = useAuth();
   const [error, setError] = useState("");
+  const [ successMessage, setSuccessMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -30,18 +30,18 @@ function SignUpForm() {
     event.preventDefault();
     setError("");
     setIsLoading(true);
+    setSuccessMessage("");
 
     try {
       const response = await postUser(
         credentials.username,
         credentials.password,
         credentials.email,
-        credentials.first_name,
-        credentials.last_name
       );
       window.localStorage.setItem("token", response.token);
       window.localStorage.setItem("userId", response.user_id);
       setAuth({ token: response.token, userId: response.user_id });
+      setSuccessMessage("Account created successfully!");
       navigate("/");
     } catch (error) {
       setError("An error occurred during sign up.");
@@ -65,35 +65,8 @@ function SignUpForm() {
               value={credentials.username}
               onChange={handleChange}
               required
-              placeholder="Choose a username"
+              placeholder="What should we call you?"
             />
-          </div>
-
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="first_name">First Name</label>
-              <i className="fas fa-user"></i>
-              <input
-                type="text"
-                id="first_name"
-                value={credentials.first_name}
-                onChange={handleChange}
-                required
-                placeholder="First name"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="last_name">Last Name</label>
-              <i className="fas fa-user"></i>
-              <input
-                type="text"
-                id="last_name"
-                value={credentials.last_name}
-                onChange={handleChange}
-                required
-                placeholder="Last name"
-              />
-            </div>
           </div>
 
           <div className="form-group">
