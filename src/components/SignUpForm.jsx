@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import postUser from "../api/post-user.js";
+import postLogin from "../api/post-login.js";
 import { useAuth } from "../hooks/use-auth.js";
 
 import "../styles/AuthPages.css";
@@ -38,9 +39,15 @@ function SignUpForm() {
         credentials.password,
         credentials.email,
       );
+
+      // Logs the user in after creating an account
+      const loginResponse = await postLogin(credentials.username, credentials.password);
+      
+      // Stores the token and user id in local storage
       window.localStorage.setItem("token", response.token);
       window.localStorage.setItem("userId", response.user_id);
       setAuth({ token: response.token, userId: response.user_id });
+     
       setSuccessMessage("Account created successfully!");
       navigate("/");
     } catch (error) {
@@ -48,7 +55,7 @@ function SignUpForm() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }
 
   return (
     <div className="auth-container">

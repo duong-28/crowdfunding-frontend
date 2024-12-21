@@ -40,6 +40,7 @@ function NavBar() {
                     {auth.token ? (
                         <>
                             <Link to="/create-project" className="nav-item">Create Project</Link>
+                            <Link to="/user-page" className="nav-item">User Profile</Link>
                             <Link to="/" onClick={handleLogout} className="nav-item">Log Out</Link>
                         </>
                     ) : (

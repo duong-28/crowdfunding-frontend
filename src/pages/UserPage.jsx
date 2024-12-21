@@ -1,3 +1,4 @@
+import DeleteUserButton from "../components/deleteUserButton.jsx";
 import UpdateUserForm from "../components/UpdateUserForm";
 import { useAuth } from "../hooks/use-auth.js";
 import useUser from "../hooks/use-user.js";
@@ -16,7 +17,9 @@ function UserPage() {
 
   return (
     <div>
+      <h2>User Profile</h2>
       <UpdateUserForm user={user}/>
+      <DeleteUserButton userId={auth.userId} token={auth.token}/>
     </div>
   );
 }

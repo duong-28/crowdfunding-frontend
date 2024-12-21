@@ -6,7 +6,8 @@ function UpdateUserForm(props) {
     const [formData, setFormData] = useState({
         username: user.username,
         email: user.email,
-        password: '', 
+        password: '',
+        confirmPassword: '',
     });
 
     const [error, setError] = useState("");
@@ -26,11 +27,22 @@ function UpdateUserForm(props) {
         setError("");
         setSuccessMessage("");
 
+        if (formData.password !== formData.confirmPassword) {
+            setError("Passwords do not match");
+            return;
+        }
+
         try {
             const token = window.localStorage.getItem("token");
             if (!token) {
                 setError("You must be logged in to update your details");
                 return;
+            }
+
+            const updateUserData = {
+                username: formData.username,
+                email: formData.email,
+                password: formData.password,
             }
 
             await updateUser(user.id, formData, token);
@@ -69,7 +81,7 @@ function UpdateUserForm(props) {
                     onChange={handleChange}
                 />
             </div>
-            {/* <div>
+            <div>
                 <label htmlFor='password'>Confirm password:</label>
                 <input
                     type='text'
@@ -77,7 +89,7 @@ function UpdateUserForm(props) {
                     value={formData.password}
                     onChange={handleChange}
                 />
-            </div> */}
+            </div>
             <button type='submit'>Update User Details</button>
             {error && <div className='error'>{error}</div>}
             {successMessage && <div className='success'>{successMessage}</div>}
