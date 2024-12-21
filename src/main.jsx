@@ -7,10 +7,10 @@ import ProjectPage from "./pages/ProjectPage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import CreateProjectPage from "./pages/CreateProjectPage"
+import UserPage from "./pages/UserPage.jsx";
 
 import NavBar from "./components/NavBar";
 import { AuthProvider } from "./components/AuthProvider.jsx";
-import UserPage from "./pages/UserPage.jsx";
 
 const router = createBrowserRouter([
   {
