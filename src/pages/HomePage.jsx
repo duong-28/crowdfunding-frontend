@@ -16,7 +16,7 @@ function HomePage() {
         } else {
             // User is not logged in, show modal/alert
             const choice = window.confirm(
-                "You need to be logged in to make a pledge. Would you like to sign up or log in?"
+                "You need to be logged in to create a project. Would you like to Log In?"
             );
             if (choice) {
                 navigate("/signup");
