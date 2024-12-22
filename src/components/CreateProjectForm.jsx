@@ -1,96 +1,119 @@
 import { useState } from "react";
-import postProject from "../api/post-project.js";
-
+import { useNavigate } from "react-router-dom";
+import postProject from "../api/post-project";
 import "./CreateProjectForm.css";
 
 function CreateProjectForm() {
-  const [projectData, setProjectData] = useState({
+  const navigate = useNavigate();
+  const [projectDetails, setProjectDetails] = useState({
     title: "",
     description: "",
-    goal: "", 
-    image: ""
+    goal: "",
+    image: "",
+    is_open: true,
   });
   const [error, setError] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (event) => {
     const { id, value } = event.target;
-    setProjectData((prevData) => ({
-      ...prevData,
+    setProjectDetails((prevDetails) => ({
+      ...prevDetails,
       [id]: value,
     }));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setError("");
+    setIsLoading(true);
 
-    setError("") //reset errors 
-    setSuccessMessage(""); //reset success message
     try {
-      const token = window.localStorage.getItem("token"); //retrieve the user's token
+      const token = window.localStorage.getItem("token");
       if (!token) {
-        setError("You must be logged in to create a project")
+        setError("Please log in to create a project");
         return;
       }
 
-    const project = await postProject(projectData, token) //calling the post project function
+      await postProject(projectDetails, token);
+      navigate("/");
+    } catch (err) {
+      setError("Failed to create project");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    setSuccessMessage(`Project created successfully: ${project.title}`); //handle success 
-  } catch (err) {
-    setError(`Failed to create project: ${err.message}`); //handle errors
-  }
-};    
+  return (
+    <div className="auth-container">
+      <div className="auth-form-container">
+        <img src="/photos/Logo.png" alt="Logo" className="auth-logo" />
+        <h1 className="auth-title">Create Project</h1>
+        <p className="auth-subtitle">Start your fundraising journey</p>
 
-
-    return (
-      <div className="form-container">
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="title">Project Title:</label>
+        <form className="auth-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="title">Project Title</label>
             <input
               type="text"
               id="title"
+              value={projectDetails.title}
+              onChange={handleChange}
+              required
               placeholder="Enter project title"
-              value={projectData.title}
-              onChange={handleChange}
             />
           </div>
-          <div>
-            <label htmlFor="description">Project Description:</label>
-            <input
-              type="text"
+
+          <div className="form-group">
+            <label htmlFor="description">Description</label>
+            <textarea
               id="description"
-              placeholder="Enter project description"
-              value={projectData.description}
+              value={projectDetails.description}
               onChange={handleChange}
+              required
+              placeholder="Describe your project"
             />
           </div>
-          <div>
-            <label htmlFor="goal">Goal:</label>
-            <input
-              type="number"
-              id="goal"
-              placeholder="Enter goal amount"
-              value={projectData.goal}
-              onChange={handleChange}
-            />
+
+          <div className="form-group">
+            <label htmlFor="goal">Goal Amount</label>
+            <div className="goal-input-container">
+              <span>$</span>
+              <input
+                type="number"
+                id="goal"
+                value={projectDetails.goal}
+                onChange={handleChange}
+                required
+                placeholder="Enter amount"
+              />
+            </div>
           </div>
-          <div>
-            <label htmlFor="image">Image URL:</label>
+
+          <div className="form-group">
+            <label htmlFor="image">Image URL</label>
             <input
-              type="text"
+              type="url"
               id="image"
-              placeholder="Enter image URL"
-              value={projectData.image}
+              value={projectDetails.image}
               onChange={handleChange}
+              placeholder="Enter image URL"
             />
           </div>
-          {error && <p className="error-message">{error}</p>}
-          {successMessage && <p className="success-message">{successMessage}</p>}
-          <button type="submit">Create Project</button>
+
+          {error && <div className="error-message">{error}</div>}
+
+          <button 
+            type="submit" 
+            className="submit-button"
+            disabled={isLoading}
+          >
+            {isLoading ? 'Creating Project...' : 'Create Project'}
+          </button>
         </form>
       </div>
-    );
-  }
-  
-  export default CreateProjectForm;
+    </div>
+  );
+}
+
+export default CreateProjectForm;
