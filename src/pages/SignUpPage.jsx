@@ -1,5 +1,5 @@
 import SignUpForm from "../components/SignUpForm";
-import "../styles/AuthPages.css";
+// import "../styles/AuthPages.css";
 
 function SignUpPage() {
     return (
