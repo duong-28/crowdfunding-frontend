@@ -4,7 +4,7 @@ import postUser from "../api/post-user.js";
 import postLogin from "../api/post-login.js";
 import { useAuth } from "../hooks/use-auth.js";
 
-import "../styles/AuthPages.css";
+import "./SignUpForm.css";
 
 function SignUpForm() {
   const [credentials, setCredentials] = useState({

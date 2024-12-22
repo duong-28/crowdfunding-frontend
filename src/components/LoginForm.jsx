@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../hooks/use-auth";
 import postLogin from "../api/post-login.js";
-import "../styles/AuthPages.css";
+
+import "./LoginForm.css";
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ function LoginForm() {
         <img src="/photos/Logo.png" alt="Logo" className="auth-logo" />
         <h1 className="auth-title">Welcome back</h1>
         
-        <form className="auth-form" onSubmit={handleSubmit}>
+        <form className="login-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="username">Username</label>
             <input
@@ -78,7 +79,7 @@ function LoginForm() {
           
           <button 
             type="submit" 
-            className={`auth-button ${isLoading ? 'loading' : ''}`}
+            className={`submit-button ${isLoading ? 'loading' : ''}`}
             disabled={isLoading}
           >
             {isLoading ? '' : 'Log in'}
@@ -86,7 +87,7 @@ function LoginForm() {
         </form>
 
         <Link to="/signup" className="auth-link">
-          Don't have an account? Sign up
+          Don't have an account? <span>Sign up</span>
         </Link>
       </div>
     </div>
