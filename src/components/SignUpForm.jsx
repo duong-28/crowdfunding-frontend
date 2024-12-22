@@ -61,11 +61,12 @@ function SignUpForm() {
     <div className="auth-container">
       <div className="auth-form-container">
         <img src="/photos/Logo.png" alt="Logo" className="auth-logo" />
-        <h1 className="auth-title">Complete your account</h1>
+        <h1 className="auth-title">Join Atletico</h1>
+        <p className="auth-subtitle">Start making a difference in youth soccer</p>
+        
         <form className="auth-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="username">Username</label>
-            <i className="fas fa-user"></i>
             <input
               type="text"
               id="username"
@@ -78,7 +79,6 @@ function SignUpForm() {
 
           <div className="form-group">
             <label htmlFor="email">Email</label>
-            <i className="fas fa-envelope"></i>
             <input
               type="email"
               id="email"
@@ -91,7 +91,6 @@ function SignUpForm() {
 
           <div className="form-group">
             <label htmlFor="password">Create a password</label>
-            <i className="fas fa-lock"></i>
             <input
               type="password"
               id="password"
@@ -109,15 +108,15 @@ function SignUpForm() {
           
           <button 
             type="submit" 
-            className={`auth-button ${isLoading ? 'loading' : ''}`}
+            className="submit-button"
             disabled={isLoading}
           >
-            {isLoading ? '' : 'Create Account'}
+            {isLoading ? 'Creating Account...' : 'Create Account'}
           </button>
         </form>
 
         <Link to="/login" className="auth-link">
-          Already have an account? Log in
+          Already have an account? <span>Log in</span>
         </Link>
       </div>
     </div>

@@ -89,13 +89,29 @@
 }
 
 .form-group input::placeholder {
-  color: rgba(48, 42, 42, 0.4);
+  color: rgba(255, 255, 255, 0.7) !important;
 }
 
 .form-group input:focus {
   border-color: #4A90E2;
   outline: none;
   background: rgba(255, 255, 255, 0.12);
+}
+
+/* For Firefox */
+.form-group input::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+  opacity: 1;
+}
+
+/* For Chrome/Safari/Opera */
+.form-group input::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* For IE/Edge */
+.form-group input:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
 }
 
 /* Submit Button */
