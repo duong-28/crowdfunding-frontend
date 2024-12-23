@@ -57,10 +57,20 @@ function UpdateUserForm({ user, onClose }) {
       onClose();
       window.location.reload();
     } catch (err) {
-      const errorMessage = err.message.includes("username") 
-        ? "Username can only contain letters, numbers, and @/./+/-/_ characters (no spaces)"
-        : `Failed to update user: ${err.message}`;
-      setError(errorMessage);
+      if (err.response?.data) {
+        const errorData = err.response.data;
+        if (errorData.username) {
+          setError(`Username error: ${errorData.username[0]}`);
+        } else if (errorData.email) {
+          setError(`Email error: ${errorData.email[0]}`);
+        } else if (errorData.password) {
+          setError(`Password error: ${errorData.password[0]}`);
+        } else {
+          setError(`Update failed: ${JSON.stringify(errorData)}`);
+        }
+      } else {
+        setError(`Failed to update user: ${err.message}`);
+      }
     }
   };
 
