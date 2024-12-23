@@ -5,6 +5,8 @@ import UpdateUserForm from "../components/UpdateUserForm";
 import DeleteUserButton from "../components/DeleteUserButton";
 import getUsers from "../api/get-users";
 import UserList from "../components/UserList";
+import deleteUser from "../api/delete-user";
+import EditUserModal from '../components/EditUserModal';
 
 import "./UserPage.css";
 
@@ -16,6 +18,7 @@ function UserPage() {
   const [sortBy, setSortBy] = useState('username');
   const [searchTerm, setSearchTerm] = useState('');
   const [showUpdateForm, setShowUpdateForm] = useState(false);
+  const [editingUser, setEditingUser] = useState(null);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -36,6 +39,35 @@ function UserPage() {
     setUsers(prevUsers => prevUsers.filter(user => user.id !== deletedUserId));
   };
 
+  const handleEditUser = (user) => {
+    setEditingUser(user);
+  };
+
+  const handleUpdateSuccess = async () => {
+    // Refresh the users list
+    try {
+      const usersData = await getUsers(auth.token);
+      setUsers(usersData);
+    } catch (err) {
+      setAdminError(err.message);
+    }
+  };
+
+  const handleDeleteUser = async (userId) => {
+    if (window.confirm('Are you sure you want to delete this user?')) {
+      try {
+        const response = await deleteUser(userId, auth.token);
+        if (response.ok) {
+          setUsers(prevUsers => prevUsers.filter(user => user.id !== userId));
+        } else {
+          throw new Error('Failed to delete user');
+        }
+      } catch (err) {
+        setAdminError('Failed to delete user');
+      }
+    }
+  };
+
   // Sort and filter users
   const sortedAndFilteredUsers = users
     .filter(user => 
@@ -43,6 +75,44 @@ function UserPage() {
       user.email.toLowerCase().includes(searchTerm.toLowerCase())
     )
     .sort((a, b) => a[sortBy].toLowerCase().localeCompare(b[sortBy].toLowerCase()));
+
+  const renderTableRow = (user) => (
+    <div key={user.id} className="table-row">
+      <div className="user-info">
+        <span className="user-avatar">
+          {user.username[0].toUpperCase()}
+        </span>
+        <span className="username">{user.username}</span>
+      </div>
+      <div>
+        <a href={`mailto:${user.email}`} className="email-link">
+          {user.email}
+        </a>
+      </div>
+      <div>
+        {user.is_superuser ? (
+          <span className="admin-badge">Admin</span>
+        ) : (
+          <span className="user-badge">User</span>
+        )}
+      </div>
+      <div>
+        <button 
+          className="admin-action-btn edit"
+          onClick={() => handleEditUser(user)}
+        >
+          Edit
+        </button>
+        <button 
+          className="admin-action-btn delete"
+          onClick={() => handleDeleteUser(user.id)}
+          disabled={user.id === auth.userId}
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  );
 
   if (isLoading) {
     return (<p>Loading user data...</p>);
@@ -136,52 +206,24 @@ function UserPage() {
             
             <div className="users-table">
               <div className="table-header">
-                <div className="col">User</div>
-                <div className="col">Email</div>
-                <div className="col">Status</div>
-                <div className="col">Actions</div>
+                <div>User</div>
+                <div>Email</div>
+                <div>Status</div>
+                <div>Actions</div>
               </div>
-              
-              {sortedAndFilteredUsers.map(user => (
-                <div key={user.id} className="table-row">
-                  <div className="col user-info">
-                    <span className="user-avatar">
-                      {user.username[0].toUpperCase()}
-                    </span>
-                    <span className="username">{user.username}</span>
-                  </div>
-                  <div className="col">
-                    <a href={`mailto:${user.email}`} className="email-link">
-                      {user.email}
-                    </a>
-                  </div>
-                  <div className="col">
-                    {user.is_superuser ? (
-                      <span className="admin-badge">Admin</span>
-                    ) : (
-                      <span className="user-badge">User</span>
-                    )}
-                  </div>
-                  <div className="col actions">
-                    <button 
-                      className="admin-action-btn edit"
-                      onClick={() => handleEditUser(user.id)}
-                    >
-                      Edit
-                    </button>
-                    <button 
-                      className="admin-action-btn delete"
-                      onClick={() => handleDeleteUser(user.id)}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              ))}
+              {sortedAndFilteredUsers.map(renderTableRow)}
             </div>
           </div>
         )}
       </div>
+
+      {editingUser && (
+        <EditUserModal
+          user={editingUser}
+          onClose={() => setEditingUser(null)}
+          onUpdate={handleUpdateSuccess}
+        />
+      )}
     </div>
   );
 }

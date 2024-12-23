@@ -440,10 +440,86 @@
     background: #dc2626;
     color: white;
     width: 100%;
+    height: 30px;
   }
   
   .admin-action-btn.delete:hover {
     background: #b91c1c;
+  }
+  
+  /* Modal Styles */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .modal-content {
+    background: rgba(32, 32, 32, 0.95);
+    padding: 2rem;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+  }
+
+  .modal-content h3 {
+    color: white;
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .cancel-button {
+    background: rgba(255, 255, 255, 0.1);
+    width: 30%;
+    height: 40px;
+  }
+
+  .cancel-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Modal Form Styles */
+  .modal-content .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .modal-content .form-group label {
+    display: block;
+    color: #a0a0a0;
+    margin-bottom: 0.5rem;
+  }
+
+  .modal-content .form-group input:not([type="checkbox"]) {
+    width: 100%;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: white;
+  }
+
+  .modal-content .checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .modal-content .checkbox-group input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 0.5rem;
   }
   
   
