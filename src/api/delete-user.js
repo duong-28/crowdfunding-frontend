@@ -1,19 +1,22 @@
 async function deleteUser(userId, token) {
-    const url = `${import.meta.env.VITE_API_URL}/users/${userId}/`; 
-    
-    const response = await fetch(url, { 
-      method: "DELETE", 
-      headers: {"Authorization": `Token ${token}`, //use the token to authenticate user 
+  const url = `${import.meta.env.VITE_API_URL}/users/${userId}/`;
+  
+  try {
+    const response = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Token ${token}`,
       },
-     });
-  
+    });
+
     if (!response.ok) {
-      const fallbackError = `Error delete project with id ${userId}`;
-      const errorMessage = data?.detail ?? fallbackError;
-      throw new Error(errorMessage);
+      throw new Error('Failed to delete user');
     }
-  
-    return true;
+
+    return response;
+  } catch (error) {
+    throw error;
   }
-  
-  export default deleteUser;
+}
+
+export default deleteUser;
