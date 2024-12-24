@@ -8,52 +8,63 @@ import PledgeForm from "../components/PledgeForm";
 import UpdateProjectForm from "../components/UpdateProjectForm";
 import useProjectPledges from "../hooks/use-project-pledges";
 import PledgeList from "../components/PledgeList";
+import "./ProjectPage.css";
 
 function ProjectPage() {
-    // Here we use a hook that comes for free in react router called `useParams` to get the id from the URL so that we can pass it to our useProject hook.
     const { id } = useParams();
     const [deleteError, setDeleteError] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
-   // useProject returns three pieces of info, so we need to grab them all here
     const { project, isLoading, error } = useProject(id);   
     const navigate = useNavigate();
     const { auth } = useAuth();
     const { pledges, isLoading: pledgesLoading, error: pledgesError } = useProjectPledges(id);
     
-   if (isLoading) {
-    return (<p>Accio project!</p>)
-   }
+    if (isLoading) {
+        return (<p>Loading project details...</p>);
+    }
 
-   if (error) {
-    return (<p>{error.message}</p>)
-   }
-  //  debugger; => This helps freeze the code at this point and we can check the value of project
+    if (error) {
+        return (<p>{error.message}</p>);
+    }
 
-   const handleDelete = async () => {
-    setDeleteError("") //reset errors 
-    setSuccessMessage(""); //reset success message
-    try {
-      const token = window.localStorage.getItem("token"); //retrieve the user's token
-      if (!token) {
-        setDeleteError("Sorry! Looks like you're not authorised to delete this project!")
-        return;
-      }
+    const handleDelete = async () => {
+        setDeleteError("");
+        setSuccessMessage("");
+        try {
+            const token = window.localStorage.getItem("token");
+            if (!token) {
+                setDeleteError("Sorry! Looks like you're not authorised to delete this project!")
+                return;
+            }
 
-    await deleteProject(id, token) 
-
-    setSuccessMessage("Project deleted successfully"); //handle success 
-    navigate("/")
-  } catch (err) {
-    setDeleteError(`Failed to delete the project: ${err.message}`); //handle errors
-  }
-};
+            await deleteProject(id, token);
+            setSuccessMessage("Project deleted successfully");
+            navigate("/");
+        } catch (err) {
+            setDeleteError(`Failed to delete the project: ${err.message}`);
+        }
+    };
 
     return (
-        <div>
-            <h2>{project.title}</h2>
-            <h3>Created at: {project.date_created}</h3>
-            <h3>{`Status: ${project.is_open ? 'Open': 'Closed'}`}</h3>
-            
+        <div className="project-page">
+            <div className="project-header">
+                <div className="project-image">
+                    <img src={project.image} alt={project.title} />
+                </div>
+                <div className="project-info">
+                    <h1 className="project-title">{project.title}</h1>
+                    <div className="project-meta">
+                        <span>Created at: {new Date(project.date_created).toLocaleDateString()}</span>
+                        <span className={`project-status ${project.is_open ? 'open' : 'closed'}`}>
+                            Status: {project.is_open ? 'Open' : 'Closed'}
+                        </span>
+                    </div>
+                    <div className="project-description">
+                        <p>{project.description}</p>
+                    </div>
+                </div>
+            </div>
+
             {pledgesLoading ? (
                 <p>Loading pledges...</p>
             ) : pledgesError ? (
@@ -63,12 +74,18 @@ function ProjectPage() {
             )}
 
             <PledgeForm projectId={id} />
-            {auth.token ? <UpdateProjectForm project={project} /> : null}
-            <button onClick={handleDelete}>Delete</button>
-            {deleteError && <p>{deleteError}</p>}
-            {successMessage && <p>{successMessage}</p>}
+
+            {auth.token && (
+                <div className="admin-actions">
+                    <UpdateProjectForm project={project} />
+                    <button onClick={handleDelete} className="delete-button">Delete Project</button>
+                </div>
+            )}
+            
+            {deleteError && <div className="error">{deleteError}</div>}
+            {successMessage && <div className="success">{successMessage}</div>}
         </div>
     );
-  }
-  
-  export default ProjectPage
+}
+
+export default ProjectPage;
