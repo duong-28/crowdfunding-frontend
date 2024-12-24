@@ -11,15 +11,16 @@ async function updateUser(userId, userData, token) {
             body: JSON.stringify(userData),
         });
 
+        const data = await response.json();
+
         if (!response.ok) {
-            const data = await response.json();
             throw {
                 message: "Failed to update user",
-                response: { data }
+                response: { status: response.status, data }
             };
         }
 
-        return await response.json();
+        return data;
     } catch (error) {
         throw error;
     }

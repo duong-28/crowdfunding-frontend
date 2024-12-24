@@ -1,28 +1,32 @@
-async function postUser(username, password, email, first_name, last_name) {
+async function postUser(username, password, email) {
     const url = `${import.meta.env.VITE_API_URL}/users/`;
-    const response = await fetch(url, {
-      method: "POST", // We need to tell the server that we are sending JSON data so we set the Content-Type header to application/json
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        "username": username,
-        "password": password,
-        "email": email, 
-      }),
-    });
-  
-    if (!response.ok) {
-      // console.log(response.json());
-      const fallbackError = `Error trying to sign up. Please try again.`;
-      const data = await response.json().catch(() => {
-        throw new Error(fallbackError);
-      });
-      const errorMessage = data?.detail ?? fallbackError;
-      throw new Error(errorMessage);
+    
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password,
+                email: email,
+            }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw {
+                message: "Failed to create user",
+                response: { status: response.status, data }
+            };
+        }
+
+        return data;
+    } catch (error) {
+        throw error;
     }
-  
-    return await response.json();
-  }
-  
-  export default postUser;
+}
+
+export default postUser;
