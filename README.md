@@ -43,22 +43,22 @@ Deployed front end project link: <https://atleticosaigon.netlify.app/>
 
 ### Homepage
 
-![The homepage](README%20Photos/Crowdfunding%20Homepage.gif)
+![The homepage]
 
 ### Project Page
 
-![The project page](README%20Photos/Project%20page%20for%20unloggedin%20users.gif)
+![The project page]
 
 ### Making a Pledge against a Project
 
-![The project with pledges](README%20Photos/Create%20Pledge%20-%20unlogged%20in%20and%20logged%20in%20users.gif)
+![The project with pledges]
 
 *Bonus Content*
 
 ### Sign Up Page
 
-![The sign up page](README%20Photos/Sign%20up%20form.gif)
+![The sign up page]
 
 ### Login Form
 
-![The login form](README%20Photos/Login%20Form.gif)
+![The login form]
