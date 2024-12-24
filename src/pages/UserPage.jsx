@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from "../hooks/use-auth.js";
 import useUser from "../hooks/use-user.js";
 import UpdateUserForm from "../components/UpdateUserForm";
-import DeleteUserButton from "../components/DeleteUserButton";
+import DeleteUserButton from '../components/DeleteUserButton.jsx';
 import getUsers from "../api/get-users";
 import deleteUser from "../api/delete-user";
 import EditUserModal from '../components/EditUserModal';
