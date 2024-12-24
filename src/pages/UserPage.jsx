@@ -4,7 +4,6 @@ import useUser from "../hooks/use-user.js";
 import UpdateUserForm from "../components/UpdateUserForm";
 import DeleteUserButton from "../components/DeleteUserButton";
 import getUsers from "../api/get-users";
-import UserList from "../components/UserList";
 import deleteUser from "../api/delete-user";
 import EditUserModal from '../components/EditUserModal';
 
