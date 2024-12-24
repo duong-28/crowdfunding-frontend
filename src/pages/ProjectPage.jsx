@@ -17,7 +17,8 @@ function ProjectPage() {
     const { project, isLoading, error } = useProject(id);   
     const navigate = useNavigate();
     const { auth } = useAuth();
-    const { pledges, isLoading: pledgesLoading, error: pledgesError } = useProjectPledges(id);
+    const [refreshPledges, setRefreshPledges] = useState(0);
+    const { pledges, isLoading: pledgesLoading, error: pledgesError } = useProjectPledges(id, refreshPledges);
     const [showUpdateForm, setShowUpdateForm] = useState(false);
     
     if (isLoading) {
@@ -29,6 +30,13 @@ function ProjectPage() {
     }
 
     const handleDelete = async () => {
+        // Add confirmation dialog
+        const isConfirmed = window.confirm("Are you sure you want to delete this project? This action cannot be undone.");
+        
+        if (!isConfirmed) {
+            return; // If user clicks Cancel, do nothing
+        }
+
         setDeleteError("");
         setSuccessMessage("");
         try {
@@ -49,6 +57,11 @@ function ProjectPage() {
     // Calculate funding progress
     const totalPledged = pledges?.reduce((sum, pledge) => sum + pledge.amount, 0) || 0;
     const progressPercentage = (totalPledged / project.goal) * 100;
+
+    // Handler for successful pledge creation
+    const handlePledgeSuccess = () => {
+        setRefreshPledges(prev => prev + 1);
+    };
 
     return (
         <div className="project-page">
@@ -115,7 +128,10 @@ function ProjectPage() {
                 <PledgeList pledges={pledges} />
             )}
 
-            <PledgeForm projectId={id} />
+            <PledgeForm 
+                projectId={id} 
+                onPledgeSuccess={handlePledgeSuccess}
+            />
             
             {deleteError && <div className="error">{deleteError}</div>}
             {successMessage && <div className="success">{successMessage}</div>}

@@ -36,7 +36,13 @@ function UpdateProjectForm(props) {
             }
 
             await updateProject(project.id, formData, token);
-            setSuccessMessage(`Project updated successfully: ${formData.title}`);
+            setSuccessMessage("Project updated successfully!");
+            
+            // Set a timeout to reload the page after 2 seconds
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+
         } catch (err) {
             setError(`Failed to update project: ${err.message}`);
         }
