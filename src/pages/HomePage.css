@@ -339,11 +339,6 @@ body {
     font-style: normal;
 }
 
-/* Ensure the last item in the grid follows the same rules */
-#project-list > *:last-child {
-    height: 100%;
-}
-
 /* Add this to your CSS file, e.g., HomePage.css */
 
 .hero-text {
