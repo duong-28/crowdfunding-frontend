@@ -8,6 +8,7 @@ import PledgeForm from "../components/PledgeForm";
 import UpdateProjectForm from "../components/UpdateProjectForm";
 import useProjectPledges from "../hooks/use-project-pledges";
 import PledgeList from "../components/PledgeList";
+
 import "./ProjectPage.css";
 
 function ProjectPage() {
