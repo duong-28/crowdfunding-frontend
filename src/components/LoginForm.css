@@ -56,9 +56,9 @@
 
 /* Form Layout */
 .login-form {
-  width: 100%;
+  width: 83%;
   max-width: 360px;
-  margin: 0 auto;
+  margin: 1 auto;
 }
 
 .login-form .form-group {
