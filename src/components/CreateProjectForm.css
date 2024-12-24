@@ -32,11 +32,13 @@
   width: 90%;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 0rem;
 }
 
 .form-group label {
   margin-bottom: 0.2rem;
   color: rgba(255, 255, 255, 0.7);
+  margin-top: 0.5rem;
 }
 
 /* Input and textarea styles */
@@ -54,13 +56,14 @@
 
 .form-group textarea {
   width: 90%;
-  height: 100px;  /* Reduced from 45px */
+  height: 90px;  /* Reduced from 45px */
   padding: 0.6rem 1rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.08);
   color: #ffffff;
   font-size: 0.9rem;
+  margin-bottom: 0rem;
 }
 
 /* Goal amount input specific styles */
