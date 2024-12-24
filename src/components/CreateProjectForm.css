@@ -4,8 +4,9 @@
 /* Adjust container size and padding */
 .auth-form-container {
   max-width: 400px;
-  padding: 1.5rem;
+  padding: 2.5rem;
   background: rgba(45, 44, 44, 0.95);
+  margin-top: 0rem;
 }
 
 /* Make logo smaller */
@@ -28,11 +29,11 @@
 
 /* Form group adjustments */
 .form-group {
-  margin-bottom: 0.75rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
   width: 90%;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 0rem;
 }
 
 .form-group label {
@@ -51,7 +52,7 @@
   background: rgba(255, 255, 255, 0.08);
   color: #ffffff;
   font-size: 0.9rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.2rem;
 }
 
 .form-group textarea {
