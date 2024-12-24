@@ -45,6 +45,10 @@ function ProjectPage() {
         }
     };
 
+    // Calculate funding progress
+    const totalPledged = pledges?.reduce((sum, pledge) => sum + pledge.amount, 0) || 0;
+    const progressPercentage = (totalPledged / project.goal) * 100;
+
     return (
         <div className="project-page">
             <div className="project-header">
@@ -53,11 +57,28 @@ function ProjectPage() {
                 </div>
                 <div className="project-info">
                     <h1 className="project-title">{project.title}</h1>
-                    <div className="project-meta">
-                        <span>Created at: {new Date(project.date_created).toLocaleDateString()}</span>
-                        <span className={`project-status ${project.is_open ? 'open' : 'closed'}`}>
-                            Status: {project.is_open ? 'Open' : 'Closed'}
-                        </span>
+                    <div className="project-meta-container">
+                        <div className="project-meta">
+                            <span>Created at: {new Date(project.date_created).toLocaleDateString()}</span>
+                            <span>
+                                Status: <span className={`project-status ${project.is_open ? 'open' : 'closed'}`}>
+                                    {project.is_open ? 'Open' : 'Closed'}
+                                </span>
+                            </span>
+                        </div>
+                        <div className="funding-progress">
+                            <div className="funding-numbers">
+                                <span className="amount-pledged">${totalPledged}</span>
+                                <span className="goal-text">pledged of ${project.goal} goal</span>
+                            </div>
+                            <div className="progress-bar">
+                                <div 
+                                    className="progress-fill" 
+                                    style={{ width: `${Math.min(progressPercentage, 100)}%` }}
+                                />
+                            </div>
+                            <span className="progress-text">{progressPercentage.toFixed(1)}% funded</span>
+                        </div>
                     </div>
                     <div className="project-description">
                         <p>{project.description}</p>
