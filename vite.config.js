@@ -8,13 +8,21 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-    }
+    },
+    extensions: ['.js', '.jsx', '.json']
   },
   build: {
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, 'index.html')
       }
+    },
+    commonjsOptions: {
+      include: [/node_modules/],
+      extensions: ['.js', '.jsx']
     }
+  },
+  server: {
+    port: 3000
   }
 })
