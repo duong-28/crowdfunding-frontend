@@ -129,8 +129,10 @@
     background: rgba(255, 255, 255, 0.03);
     border-radius: 15px;
     padding: 2rem;
-    margin: 2rem 0;
+    margin: 2rem auto;
     border: 1px solid rgba(255, 255, 255, 0.05);
+    max-width: 50%;
+    width: 100%;
 }
 
 .pledge-list h2 {
@@ -175,8 +177,10 @@ form {
     background: rgba(255, 255, 255, 0.03);
     border-radius: 15px;
     padding: 2rem;
-    margin: 2rem 0;
+    margin: 2rem auto;
     border: 1px solid rgba(255, 255, 255, 0.05);
+    max-width: 50%;
+    width: 100%;
 }
 
 form label {
@@ -187,7 +191,7 @@ form label {
 
 form input,
 form textarea {
-    width: 100%;
+    width: 95%;
     padding: 0.8rem;
     margin-bottom: 1rem;
     background: rgba(255, 255, 255, 0.08);
