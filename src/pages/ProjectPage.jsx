@@ -18,6 +18,7 @@ function ProjectPage() {
     const navigate = useNavigate();
     const { auth } = useAuth();
     const { pledges, isLoading: pledgesLoading, error: pledgesError } = useProjectPledges(id);
+    const [showUpdateForm, setShowUpdateForm] = useState(false);
     
     if (isLoading) {
         return (<p>Loading project details...</p>);
@@ -86,6 +87,26 @@ function ProjectPage() {
                 </div>
             </div>
 
+            {auth.token && (
+                <div className="admin-actions">
+                    <button 
+                        className="admin-button"
+                        onClick={() => setShowUpdateForm(!showUpdateForm)}
+                    >
+                        Update Project
+                    </button>
+                    <div className={`update-form ${showUpdateForm ? 'visible' : ''}`}>
+                        <UpdateProjectForm project={project} />
+                    </div>
+                    <button 
+                        className="admin-button delete"
+                        onClick={handleDelete}
+                    >
+                        Delete Project
+                    </button>
+                </div>
+            )}
+
             {pledgesLoading ? (
                 <p>Loading pledges...</p>
             ) : pledgesError ? (
@@ -95,13 +116,6 @@ function ProjectPage() {
             )}
 
             <PledgeForm projectId={id} />
-
-            {auth.token && (
-                <div className="admin-actions">
-                    <UpdateProjectForm project={project} />
-                    <button onClick={handleDelete} className="delete-button">Delete Project</button>
-                </div>
-            )}
             
             {deleteError && <div className="error">{deleteError}</div>}
             {successMessage && <div className="success">{successMessage}</div>}
