@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import updateUser from '../api/update-user.js';
+import { useAuth } from "../hooks/use-auth.js";
+import postLogin from "../api/post-login.js";
 
 function UpdateUserForm({ user, onClose }) {
+  const { auth, setAuth } = useAuth();
   const [formData, setFormData] = useState({
     username: user.username || "",
     email: user.email || "",
@@ -49,13 +52,19 @@ function UpdateUserForm({ user, onClose }) {
       const updateUserData = {
         username: formData.username,
         email: formData.email,
-        password: formData.password,
-      }
+        ...(formData.password && { password: formData.password })
+      };
 
       await updateUser(user.id, updateUserData, token);
-      setSuccessMessage(`User details updated successfully: ${formData.username}`);
-      onClose();
-      window.location.reload();
+
+      // Force logout and redirect to login page after any profile update
+      setSuccessMessage("Profile updated successfully. Please log in with your new credentials.");
+      setTimeout(() => {
+        window.localStorage.clear(); // Clear all stored data
+        setAuth(null); // Clear auth context
+        window.location.href = "/login";
+      }, 1500);
+
     } catch (err) {
       if (err.response?.data) {
         const errorData = err.response.data;
@@ -86,7 +95,7 @@ function UpdateUserForm({ user, onClose }) {
           placeholder="Enter new username (no spaces allowed)"
         />
         <small className="helper-text">
-          Only letters, numbers, and @/./+/-/_ characters allowed
+          Username should only contain letters, numbers, and @/./+/-/_ characters
         </small>
       </div>
 

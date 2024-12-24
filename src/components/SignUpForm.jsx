@@ -43,15 +43,28 @@ function SignUpForm() {
       // Logs the user in after creating an account
       const loginResponse = await postLogin(credentials.username, credentials.password);
       
-      // Stores the token and user id in local storage
       window.localStorage.setItem("token", response.token);
       window.localStorage.setItem("userId", response.user_id);
-      setAuth({ token: loginResponse.token , userId: loginResponse.user_id });
+      setAuth({ token: loginResponse.token, userId: loginResponse.user_id });
      
       setSuccessMessage("Account created successfully!");
       navigate("/");
-    } catch (error) {
-      setError("An error occurred during sign up.");
+    } catch (err) {
+      // Extract and display specific error messages from the backend
+      if (err.response?.data) {
+        const errorData = err.response.data;
+        if (errorData.username) {
+          setError(`Username error: ${errorData.username[0]}`);
+        } else if (errorData.email) {
+          setError(`Email error: ${errorData.email[0]}`);
+        } else if (errorData.password) {
+          setError(`Password error: ${errorData.password[0]}`);
+        } else {
+          setError("An error occurred during sign up.");
+        }
+      } else {
+        setError("An error occurred during sign up.");
+      }
     } finally {
       setIsLoading(false);
     }
