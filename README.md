@@ -1,10 +1,43 @@
 # Crowdfunding Front End for Atletico Saigon
+> A React-based crowdfunding platform designed to support youth soccer initiatives. 
+> The platform enables users to create and manage fundraising projects, make pledges, and track funding progress in real-time. Features include project creation, anonymous pledging, funding progress tracking, and a responsive modern UI.
+---
+Developed by Lucy Nguyen
 
-by Lucy Nguyen
+## 🚀Live Demo: <https://atleticosaigon.netlify.app/>
 
-Deployed front end project link: <https://atleticosaigon.netlify.app/>
+> This project is the front end of the Atletico Saigon crowdfunding platform. The back end is built using Django Rest Framework and can be found at <https://github.com/duong-28/crowdfuning_back_end>
 
-> A React-based crowdfunding platform designed to support youth soccer initiatives. The platform enables users to create and manage fundraising projects, make pledges, and track funding progress in real-time. Features include project creation, anonymous pledging, funding progress tracking, and a responsive modern UI.
+## User Access
+**Admin**
+- Full access to projects: can view, create, update, and delete projects.
+- Can view and make pledges (with the option to pledge anonymously).
+- Can view, update, and delete their own profile and all other users' profiles.
+
+**Registered Users**
+- Can view projects, create new projects, and update projects they have created.
+- Can view and make pledges (with the option to pledge anonymously).
+- Can view, update, and delete their own profile.
+
+**Visitors**
+- View active projects
+- Make anonymous pledges
+
+## Project Page Features
+Each project page shows:
+- Funding goal and current amount pledged
+- Project status (Open/Closed)
+- Visual progress bar
+- List of pledges
+- Update/delete options for project owners and admins
+
+## 🛣️ Future Enhancements
+- Enhanced pledge management for administrators and pledge owners
+- Advanced project lifecycle management including reopening closed projects
+- Expanded analytics and reporting capabilities
+- Integration with additional payment gateways
+
+> Technologies used: React, JavaScript, HTML, CSS, Material-UI, Axios, React Router, React Hook Form, and Netlify for deployment.
 
 
 ## Project Requirements/Specs
@@ -42,4 +75,25 @@ Deployed front end project link: <https://atleticosaigon.netlify.app/>
 <https://atleticosaigon.netlify.app/>
 
 ### Homepage
-![Homepage](public/photos/Homepage.gif)
+![Homepage](public/photos/Homepage.png)
+
+### Login Page
+![LoginPage](public/photos/LoginPage.png)
+
+### SignUp Page
+![SignUpPage](public/photos/SignUpForm.png)
+
+### Project Page
+![ProjectPage](public/photos/ProjectPageAdmin.png)
+
+### Create Project Form
+![CreateProject](public/photos/CreateProjectForm.png)
+
+### Admin Profile Page
+![AdminProfile](public/photos/UserProfileAdmin.png)
+
+### Regular User Profile Page
+![RegularUserPage](public/photos/UserProfileRegular.png)
+
+### Unauthorised User can only view projects and make pledges anonymously
+![UnauthorisedUser](<public/photos/Unauthorised user.png>)
