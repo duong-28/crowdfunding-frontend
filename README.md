@@ -1,12 +1,12 @@
 # Crowdfunding Front End for Atletico Saigon
-> A React-based crowdfunding platform designed to support youth soccer initiatives. 
-> The platform enables users to create and manage fundraising projects, make pledges, and track funding progress in real-time. Features include project creation, anonymous pledging, funding progress tracking, and a responsive modern UI.
+> A React-based crowdfunding website designed to support youth soccer in Saigon. The platform enables users to create and manage fundraising projects, make pledges, and track funding progress in real-time. Features include user authentication, project creation, pledge management, and user profile management.       
 ---
  👩‍💻 Developed by Lucy Nguyen
 
 ## 🚀Live Demo: <https://atleticosaigon.netlify.app/>
 
 > 🔗 This project is the front end of the Atletico Saigon crowdfunding platform. The back end is built using Django Rest Framework and can be found at <https://github.com/duong-28/crowdfuning_back_end>
+
 > 📸 Scroll down for visual previews!
 
 ## 🔐 User Access Levels
