@@ -42,23 +42,4 @@ Deployed front end project link: <https://atleticosaigon.netlify.app/>
 <https://atleticosaigon.netlify.app/>
 
 ### Homepage
-
-![The homepage]
-
-### Project Page
-
-![The project page]
-
-### Making a Pledge against a Project
-
-![The project with pledges]
-
-*Bonus Content*
-
-### Sign Up Page
-
-![The sign up page]
-
-### Login Form
-
-![The login form]
+![Homepage](public/photos/Homepage.gif)
