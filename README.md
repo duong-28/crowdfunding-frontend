@@ -7,6 +7,7 @@
 ## 🚀Live Demo: <https://atleticosaigon.netlify.app/>
 
 > 🔗 This project is the front end of the Atletico Saigon crowdfunding platform. The back end is built using Django Rest Framework and can be found at <https://github.com/duong-28/crowdfuning_back_end>
+> 📸 Scroll down for visual previews!
 
 ## 🔐 User Access Levels
 **Admin**
@@ -40,7 +41,7 @@ Each project page shows:
 
 > Technologies used: React, JavaScript, HTML, CSS, Material-UI, Axios, React Router, React Hook Form, and Netlify for deployment.
 
-### 💻 Project Requirements/Specs
+### 💻 She Codes Project Requirements/Specs
 
 - [x] Be separated in to two distinct projects: an API built using the Django Rest Framework and a website built using React.
 - [x] Have a unique and creative project name (bonus points for puns and missing vowels!).
@@ -70,9 +71,7 @@ Each project page shows:
 - [x] Use Token Authentication, including an endpoint for obtaining a token along with the current user's details.
 - [x] Ensure responsive design for mobile and desktop compatibility.
 
-### Deployed Project Link
-
-<https://atleticosaigon.netlify.app/>
+### 📸 Application Highlights
 
 ### Homepage
 ![Homepage](public/photos/Homepage.png)
