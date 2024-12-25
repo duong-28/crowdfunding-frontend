@@ -2,13 +2,13 @@
 > A React-based crowdfunding platform designed to support youth soccer initiatives. 
 > The platform enables users to create and manage fundraising projects, make pledges, and track funding progress in real-time. Features include project creation, anonymous pledging, funding progress tracking, and a responsive modern UI.
 ---
-Developed by Lucy Nguyen
+ 👩‍💻 Developed by Lucy Nguyen
 
 ## 🚀Live Demo: <https://atleticosaigon.netlify.app/>
 
-> This project is the front end of the Atletico Saigon crowdfunding platform. The back end is built using Django Rest Framework and can be found at <https://github.com/duong-28/crowdfuning_back_end>
+> 🔗 This project is the front end of the Atletico Saigon crowdfunding platform. The back end is built using Django Rest Framework and can be found at <https://github.com/duong-28/crowdfuning_back_end>
 
-## User Access
+## 🔐 User Access Levels
 **Admin**
 - Full access to projects: can view, create, update, and delete projects.
 - Can view and make pledges (with the option to pledge anonymously).
@@ -23,7 +23,7 @@ Developed by Lucy Nguyen
 - View active projects
 - Make anonymous pledges
 
-## Project Page Features
+## 🌟 Key Features
 Each project page shows:
 - Funding goal and current amount pledged
 - Project status (Open/Closed)
@@ -36,11 +36,11 @@ Each project page shows:
 - Advanced project lifecycle management including reopening closed projects
 - Expanded analytics and reporting capabilities
 - Integration with additional payment gateways
+- A more grasping user interface with animations and transitions for Project page.
 
 > Technologies used: React, JavaScript, HTML, CSS, Material-UI, Axios, React Router, React Hook Form, and Netlify for deployment.
 
-
-## Project Requirements/Specs
+### 💻 Project Requirements/Specs
 
 - [x] Be separated in to two distinct projects: an API built using the Django Rest Framework and a website built using React.
 - [x] Have a unique and creative project name (bonus points for puns and missing vowels!).
